@@ -1,0 +1,1194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>ChemCom — Investor Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --bg-2: #FAFAF9;
+    --surface: #F5F5F4;
+    --surface-2: #F1F5F9;
+    --line: #E5E7EB;
+    --line-strong: #D1D5DB;
+
+    --text: #0B1220;
+    --text-dim: #475569;
+    --text-mute: #94A3B8;
+
+    --accent: #1D4ED8;       /* deep industrial blue, flat */
+    --accent-soft: #EFF4FF;  /* very light blue surface */
+    --ink: #0F172A;
+
+    --slide-w: 1440px;
+    --slide-h: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #1F2937;
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    height: 100dvh; width: 100vw;
+  }
+
+  .stage {
+    position: fixed; inset: 0;
+    width: 100vw; height: 100dvh;
+    background: #1F2937;
+    overflow: hidden;
+  }
+
+  .deck {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: var(--slide-w);
+    height: var(--slide-h);
+    transform-origin: 0 0;
+    background: var(--bg);
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    padding: 96px 110px;
+    display: none;
+    background: var(--bg);
+    color: var(--text);
+  }
+  .slide.active { display: block; }
+
+  /* === Type === */
+  .eyebrow {
+    font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
+  }
+  .slide-number {
+    font-size: 20px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-mute); font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  h1.title {
+    font-size: 124px; line-height: 0.95; font-weight: 800;
+    letter-spacing: -0.035em; margin: 0; color: var(--ink);
+  }
+  h2.section {
+    font-size: 76px; line-height: 1.05; font-weight: 800;
+    letter-spacing: -0.025em; margin: 0; color: var(--ink);
+  }
+  h3.sub {
+    font-size: 42px; line-height: 1.15; font-weight: 700;
+    letter-spacing: -0.01em; margin: 0;
+  }
+  .lede {
+    font-size: 34px; line-height: 1.35; font-weight: 400;
+    color: var(--text-dim); max-width: 1100px;
+  }
+  .body {
+    font-size: 26px; line-height: 1.5; font-weight: 400;
+    color: var(--text); max-width: 1000px;
+  }
+  .small {
+    font-size: 20px; line-height: 1.5; color: var(--text-dim);
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+
+  .accent { color: var(--accent); }
+  .ink { color: var(--ink); }
+  .dim { color: var(--text-dim); }
+
+  /* Top header bar on every slide */
+  .header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 64px;
+  }
+  .brandmark {
+    display: inline-flex; align-items: center; gap: 14px;
+    color: var(--ink); font-weight: 800; font-size: 24px;
+    letter-spacing: -0.01em;
+  }
+  .brandmark .glyph {
+    display: inline-grid; place-items: center;
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--accent);
+    color: white; font-weight: 800; font-size: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Footer chrome */
+  .chrome {
+    position: absolute; left: 110px; right: 110px; bottom: 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--text-mute); font-size: 18px; letter-spacing: 0.12em;
+    text-transform: uppercase; font-weight: 600;
+  }
+
+  /* Reusable: stat blocks (flat, bordered, no gradients) */
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
+  .stat {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 36px;
+  }
+  .stat .num {
+    font-size: 80px; line-height: 1; font-weight: 800;
+    letter-spacing: -0.03em; color: var(--ink);
+  }
+  .stat .num.accent { color: var(--accent); }
+  .stat .lbl {
+    margin-top: 18px; font-size: 20px; color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* Reusable: numbered list */
+  ul.numbered {
+    list-style: none; padding: 0; margin: 36px 0 0;
+    display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 1100px;
+  }
+  ul.numbered li {
+    display: grid; grid-template-columns: 72px 1fr; gap: 20px; align-items: start;
+    padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  ul.numbered li .n {
+    font-size: 18px; letter-spacing: 0.12em;
+    color: var(--accent); font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    padding-top: 6px;
+  }
+  ul.numbered li .t {
+    font-size: 24px; line-height: 1.4; font-weight: 500; color: var(--text);
+  }
+  ul.numbered li .t strong { font-weight: 800; color: var(--ink); }
+
+  /* === SLIDE 1 — TITLE === */
+  .title-slide {
+    display: none;
+    padding: 0;
+    background-color: #080C14;
+    color: #FFFFFF;
+    overflow: hidden;
+  }
+  .title-slide.active {
+    display: flex;
+    flex-direction: column;
+  }
+  /* Image pinned to top, natural aspect, full slide width */
+  .title-slide .bg-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    display: block;
+    z-index: 0;
+    user-select: none;
+    pointer-events: none;
+  }
+  /* Header sits at top of slide, over image */
+  .title-slide .header {
+    position: relative;
+    z-index: 2;
+    padding: 60px 110px 0;
+    margin: 0;
+  }
+  .title-slide .brandmark { color: #FFFFFF; }
+  .title-slide .brandmark .glyph { background: #FFFFFF; color: var(--ink); }
+  .title-slide .eyebrow { color: rgba(255,255,255,0.85); }
+
+  /* Hero block — eyebrow + tagline, over image, positioned in lower half */
+  .title-slide .hero {
+    position: relative;
+    z-index: 2;
+    padding: 220px 110px 60px;
+  }
+  .title-slide .tagline {
+    font-size: 168px; line-height: 0.92; font-weight: 800;
+    letter-spacing: -0.04em; color: #FFFFFF;
+    margin: 28px 0 0;
+  }
+  .title-slide .tagline .pop {
+    color: #FFFFFF;
+    -webkit-text-stroke: 2px #22D3EE;
+    text-stroke: 2px #22D3EE;
+    paint-order: stroke fill;
+  }
+
+  /* Banner starts right below the hero and fills to slide bottom */
+  .title-slide .sub-banner {
+    position: relative;
+    z-index: 2;
+    flex: 1 1 auto;
+    display: flex; flex-direction: column;
+    background: rgba(8, 12, 20, 0.55);
+    backdrop-filter: blur(14px) saturate(1.1);
+    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+    padding: 44px 110px 50px;
+  }
+  .title-slide .sub {
+    margin: 0;
+    font-size: 32px; color: #22D3EE;
+    font-weight: 500; max-width: 1100px; line-height: 1.45;
+  }
+  .title-slide .presented-by {
+    margin-top: auto;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex; justify-content: space-between; align-items: end;
+    color: rgba(255,255,255,0.65); font-size: 20px;
+  }
+  .title-slide .presented-by .name { color: #FFFFFF; font-weight: 700; }
+
+  /* === SLIDE 2 — PERSONAL INTRO === */
+  .slide-intro .intro-product {
+    position: absolute;
+    left: -380px;
+    bottom: -940px;
+    height: 220%;
+    width: auto;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+            mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  }
+  .slide-intro .header,
+  .slide-intro .title-banner,
+  .slide-intro .intro-body {
+    position: relative;
+    z-index: 1;
+  }
+  .slide-intro .title-banner {
+    margin: -96px -110px 0;
+    padding: 60px 110px 64px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(22px) saturate(1.15);
+    -webkit-backdrop-filter: blur(22px) saturate(1.15);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 82%, transparent 100%);
+  }
+  .slide-intro .title-banner .header { margin-bottom: 0; }
+  .slide-intro .banner-body {
+    margin-top: 36px;
+  }
+  .slide-intro .banner-body .section .hand {
+    color: var(--accent);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  .slide-intro .intro-body {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 80px;
+  }
+  .slide-intro .intro-body > ul.numbered,
+  .slide-intro .intro-body > .closer {
+    grid-column: 2;
+    margin: 0;
+  }
+  .slide-intro .intro-body ul.numbered { gap: 14px; }
+  .slide-intro .intro-body ul.numbered li {
+    padding-top: 16px;
+  }
+  .slide-intro .intro-body ul.numbered li .t {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  .slide-intro .intro-body .closer {
+    margin-top: 20px;
+    font-size: 20px;
+    padding-left: 18px;
+  }
+  .intro-grid {
+    display: grid; grid-template-columns: 1fr 1.15fr;
+    gap: 80px; align-items: start; margin-top: 40px;
+  }
+  .intro-grid .role-stack {
+    font-size: 88px; font-weight: 800; line-height: 1.0;
+    letter-spacing: -0.035em;
+  }
+  .intro-grid .role-stack .dim { color: var(--text-mute); display: block; }
+  .intro-grid .role-stack .pop {
+    color: var(--accent); display: block;
+  }
+  .intro-grid .role-stack .role-sub {
+    display: block;
+    margin-top: 22px;
+    font-size: 30px; font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-dim);
+    line-height: 1.25;
+  }
+  .intro-grid .closer {
+    margin-top: 28px; font-size: 26px; font-weight: 700;
+    line-height: 1.35; color: var(--ink);
+    border-left: 3px solid var(--accent); padding-left: 22px;
+  }
+
+  /* === SLIDE 2 — PROBLEM + SOLUTION === */
+  .ps-chart-wide {
+    margin: 36px 0 32px;
+    width: 100%;
+    height: 200px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 24px 32px;
+  }
+  .ps-chart-wide svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .ps-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+  }
+  .ps-col {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 26px 30px;
+    display: flex; flex-direction: column;
+  }
+  .ps-col.ps-then {
+    background: var(--surface);
+    border-top: 3px solid var(--text-mute);
+  }
+  .ps-col.ps-now {
+    background: var(--bg);
+    border-top: 3px solid var(--accent);
+  }
+  .ps-label {
+    font-size: 18px; letter-spacing: 0.16em;
+    font-weight: 700; text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+  .ps-then .ps-label { color: var(--text-mute); }
+  .ps-now .ps-label { color: var(--accent); }
+
+  .ps-list {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .ps-list li {
+    display: grid; grid-template-columns: 24px 1fr;
+    gap: 12px; align-items: start;
+    font-size: 18px; line-height: 1.45;
+    color: var(--text); font-weight: 500;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+  }
+  .ps-list li:first-child { border-top: 0; padding-top: 0; }
+  .ps-mark {
+    font-size: 22px;
+    line-height: 1; font-weight: 800;
+    color: var(--text-mute);
+    padding-top: 2px;
+  }
+  .ps-mark.ps-mark-good { color: var(--accent); }
+
+  /* === SLIDE 6 — HERO CUSTOMER === */
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    align-items: end;
+  }
+  .hero-row-text { min-width: 0; }
+  .customer-logo {
+    height: 150px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+    opacity: 0.95;
+  }
+  .customer-strip {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+    padding: 28px 80px;
+  }
+  .customer-strip-logos {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 32px;
+  }
+  .customer-strip-logos img {
+    height: 78px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+  }
+  .case-grid {
+    margin-top: 28px;
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px;
+    align-items: start;
+  }
+  .case-grid .stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  .case-grid .stats .stat { padding: 24px 26px; }
+  .case-grid .stats .stat .num { font-size: 52px; }
+  .case-grid .stats .stat .lbl { font-size: 17px; margin-top: 10px; }
+  .case-grid .quote {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 26px 30px;
+    font-size: 19px; line-height: 1.45; font-style: italic;
+    color: var(--text);
+  }
+  .case-grid .quote .who {
+    font-style: normal; margin-top: 18px; color: var(--text-dim);
+    font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .award-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 12px 22px;
+    font-size: 20px; font-weight: 700; letter-spacing: 0.04em;
+    margin-top: 28px; border-radius: 4px;
+  }
+  .award-line {
+    margin-top: 18px;
+    font-size: 22px; font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.005em;
+  }
+
+  /* === SLIDE 5 — SCALING + AMSOIL === */
+  .scaling-grid {
+    margin-top: 56px;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px;
+    align-items: stretch;
+  }
+  .amsoil-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 36px;
+    height: 100%;
+    display: flex; flex-direction: column;
+  }
+  .amsoil-logo {
+    height: 110px;
+    width: auto;
+    align-self: flex-start;
+    margin-bottom: 28px;
+  }
+  .amsoil-tag {
+    font-size: 18px; letter-spacing: 0.14em;
+    color: var(--accent); font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .amsoil-desc {
+    margin: 0; font-size: 22px; line-height: 1.5;
+    color: var(--text-dim);
+  }
+  .scaling-stats {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+  }
+  .scaling-stats .stat .num { font-size: 64px; }
+  .partner-row {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+  }
+  .partner-row-label {
+    font-size: 16px; letter-spacing: 0.16em;
+    color: var(--text-mute); font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .partner-tags {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .partner-tag {
+    border: 1px solid var(--line);
+    padding: 10px 16px; border-radius: 4px;
+    font-size: 18px; font-weight: 500;
+    color: var(--text-dim);
+  }
+  .partner-tag strong {
+    color: var(--ink); font-weight: 800;
+  }
+
+  /* === SLIDE 6 — ECONOMICS + MARKET (dark themed) === */
+  .slide-dark {
+    background-color: #050912;
+    color: #FFFFFF;
+    overflow: hidden;
+  }
+  .slide-dark .dark-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: blur(36px) saturate(1.05);
+    transform: scale(1.15);
+    opacity: 0.85;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  .slide-dark::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(5,9,18,0.55) 0%, rgba(5,9,18,0.80) 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .slide-dark > * { position: relative; z-index: 1; }
+  .slide-dark .brandmark { color: #FFFFFF; }
+  .slide-dark .brandmark .glyph {
+    background: #FFFFFF; color: #0B1220;
+  }
+  .slide-dark .slide-number { color: rgba(255,255,255,0.55); }
+  .slide-dark .eyebrow { color: #22D3EE; }
+  .slide-dark .section { color: #FFFFFF; }
+  .slide-dark .section .accent { color: #22D3EE; }
+  .slide-dark .em-col-label { color: #22D3EE; }
+  .slide-dark .em-list li {
+    color: rgba(255,255,255,0.78);
+    border-color: rgba(255,255,255,0.10);
+  }
+  .slide-dark .em-list li strong { color: #FFFFFF; }
+  .slide-dark .em-callout {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-left: 3px solid #22D3EE;
+    backdrop-filter: blur(8px);
+  }
+  .slide-dark .em-callout-num { color: #22D3EE; }
+  .slide-dark .em-callout-lbl { color: rgba(255,255,255,0.65); }
+  .slide-dark .market-bar-lbl { color: rgba(255,255,255,0.75); }
+  .slide-dark .em-footnote { color: rgba(255,255,255,0.50); }
+
+  /* Dark-theme overrides for slides 7 and 8 */
+  .slide-dark .ask-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .slide-dark .ask-card .n { color: #22D3EE; }
+  .slide-dark .ask-card h4 { color: #FFFFFF; }
+  .slide-dark .ask-card p { color: rgba(255,255,255,0.70); }
+  .slide-dark .comp {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .slide-dark .comp .val { color: #22D3EE; }
+  .slide-dark .comp .desc { color: rgba(255,255,255,0.70); }
+  .slide-dark .comp .year { color: rgba(255,255,255,0.55); }
+  .slide-dark .close-card {
+    border-top-color: rgba(255,255,255,0.15);
+  }
+  .slide-dark .close-card .tag { color: #FFFFFF; }
+  .slide-dark .close-card .tag .accent { color: #22D3EE; }
+  .slide-dark .close-card .contact { color: rgba(255,255,255,0.70); }
+  .slide-dark .close-card .contact .name { color: #FFFFFF; }
+  .slide-dark .section .dim { color: rgba(255,255,255,0.42); font-weight: 500; }
+
+  /* === SLIDE 6 (legacy light styles) === */
+  .em-grid {
+    margin-top: 56px;
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 40px;
+  }
+  .em-col-label {
+    font-size: 16px; letter-spacing: 0.16em;
+    color: var(--accent); font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .em-list {
+    list-style: none; padding: 0; margin: 0 0 32px;
+  }
+  .em-list li {
+    font-size: 22px; line-height: 1.4;
+    padding: 16px 0; border-top: 1px solid var(--line);
+    color: var(--text-dim);
+  }
+  .em-list li:first-child { border-top: 0; padding-top: 0; }
+  .em-list li strong { color: var(--ink); font-weight: 800; }
+  .em-callout {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    padding: 24px 28px; border-radius: 4px;
+  }
+  .em-callout-num {
+    font-size: 56px; font-weight: 800;
+    letter-spacing: -0.025em; line-height: 1;
+  }
+  .em-callout-lbl {
+    margin-top: 10px; font-size: 18px;
+    color: var(--text-dim); letter-spacing: 0.05em;
+  }
+  .market-row {
+    margin-bottom: 22px;
+  }
+  .market-bar {
+    height: 44px;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    display: flex; align-items: center; padding: 0 16px;
+    border-radius: 2px;
+    min-width: 90px;
+  }
+  .market-bar-lbl {
+    margin-top: 8px;
+    font-size: 18px;
+    color: var(--text-dim);
+  }
+  .em-footnote {
+    margin-top: 18px;
+    font-size: 16px; color: var(--text-mute);
+    font-style: normal;
+  }
+
+  /* === SLIDE 7 — ASK + PARTNER === */
+  .ask-split {
+    margin-top: 56px;
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 32px;
+  }
+  .ask-money {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 36px;
+  }
+  .ask-money-num {
+    font-size: 96px; font-weight: 800;
+    letter-spacing: -0.035em; line-height: 1;
+  }
+  .ask-money-lbl {
+    margin-top: 12px;
+    font-size: 22px; color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .ask-money-list {
+    list-style: none; padding: 0; margin: 28px 0 0;
+  }
+  .ask-money-list li {
+    font-size: 20px; line-height: 1.45;
+    padding: 14px 0;
+    border-top: 1px solid var(--line);
+    color: var(--text);
+  }
+  .ask-money-list li strong { color: var(--ink); font-weight: 800; }
+  .ask-partner-lbl {
+    font-size: 16px; letter-spacing: 0.16em;
+    color: var(--accent); font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .ask-partner ul.numbered { margin: 0; }
+  .ask-partner ul.numbered li .t { font-size: 22px; }
+
+  /* === SLIDE 14 — PARTNER ASKS === */
+  .ask-grid {
+    margin-top: 56px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+  }
+  .ask-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 40px;
+    min-height: 260px;
+  }
+  .ask-card .n {
+    font-size: 18px; letter-spacing: 0.16em; color: var(--accent);
+    font-weight: 700; margin-bottom: 20px; font-variant-numeric: tabular-nums;
+  }
+  .ask-card h4 {
+    margin: 0 0 16px; font-size: 30px; font-weight: 800;
+    letter-spacing: -0.015em; color: var(--ink);
+  }
+  .ask-card p {
+    margin: 0; font-size: 22px; line-height: 1.5; color: var(--text-dim);
+  }
+
+  /* === SLIDE 15 — EXIT + CLOSE === */
+  .comps-row {
+    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .comp {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 32px;
+  }
+  .comp .val {
+    font-size: 56px; font-weight: 800; letter-spacing: -0.025em;
+    color: var(--ink); line-height: 1;
+  }
+  .comp .desc { font-size: 19px; color: var(--text-dim); margin-top: 16px; line-height: 1.45; }
+  .comp .year {
+    font-size: 16px; color: var(--accent); margin-top: 14px;
+    font-weight: 700; letter-spacing: 0.08em;
+  }
+
+  .close-card {
+    margin-top: 60px;
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+    display: flex; justify-content: space-between; align-items: end;
+  }
+  .close-card .tag {
+    font-size: 48px; font-weight: 800; letter-spacing: -0.025em;
+    max-width: 820px; line-height: 1.05; color: var(--ink);
+  }
+  .close-card .tag .accent { color: var(--accent); }
+  .close-card .contact {
+    text-align: right; color: var(--text-dim); font-size: 20px; line-height: 1.6;
+  }
+  .close-card .contact .name { color: var(--ink); font-weight: 800; font-size: 26px; }
+
+  /* status flag (working draft) */
+  .status {
+    position: absolute; top: 36px; right: 110px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 5px 14px; border-radius: 999px;
+    font-size: 13px; letter-spacing: 0.14em;
+    text-transform: uppercase; font-weight: 700;
+    display: none; /* hidden by default; toggle by adding .show-status to body */
+  }
+
+  /* Nav — minimal */
+  .back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 20;
+    background: rgba(15,23,42,0.7);
+    color: white; border: 0;
+    width: 44px; height: 44px; border-radius: 50%;
+    cursor: pointer;
+    display: none; align-items: center; justify-content: center;
+    font-size: 18px; line-height: 1;
+    backdrop-filter: blur(8px);
+    transition: background 0.15s;
+  }
+  .back-btn.visible { display: flex; }
+  .back-btn:hover { background: rgba(15,23,42,0.9); }
+
+  .page-count {
+    position: fixed; bottom: 16px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    color: white;
+    background: rgba(15,23,42,0.55);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; letter-spacing: 0.14em;
+    font-weight: 700; font-variant-numeric: tabular-nums;
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+  }
+
+  .stage { cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="stage"><div class="deck" id="deck">
+
+  <!-- ============ SLIDE 1 — TITLE ============ -->
+  <section class="slide title-slide active" data-title="Title">
+    <img class="bg-image" src="images/robbymoon_up-close_minimal_molecules_background_--ar_169_--v_7_73a0b1b4-378b-4010-8b38-011384d8ceeb.png" alt="" />
+
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+    </div>
+
+    <div class="hero">
+      <div class="eyebrow">01 · Industrial Automation · IoT · SaaS</div>
+      <div class="tagline"><span class="pop">Cruise</span> control<br/>for <span class="pop">chemistry</span>.</div>
+    </div>
+
+    <div class="sub-banner">
+      <div class="sub">Automated concentration control for the chemicals that run modern manufacturing — replacing manual testing with sensors and software, 24/7.</div>
+      <div class="presented-by">
+        <div>Presented by <span class="name">Robert Thomas</span> · Engineering</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 2 — PROBLEM + SOLUTION ============ -->
+  <section class="slide slide-ps" data-title="Problem + Solution">
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">02 · The Problem &amp; Solution</div>
+    </div>
+
+    <div class="eyebrow">The problem &amp; solution</div>
+    <h2 class="section" style="margin-top:14px; max-width:1240px; font-size:64px">
+      Chemical concentration control is stuck in the <span class="accent">Dark Ages</span>.
+    </h2>
+
+    <div class="ps-chart-wide">
+      <svg viewBox="0 0 800 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- spec band fill -->
+        <rect x="0" y="60" width="800" height="60" fill="rgba(15,23,42,0.04)" />
+        <!-- upper and lower limit lines (neutral gray) -->
+        <line x1="0" y1="60" x2="800" y2="60" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6 5" />
+        <line x1="0" y1="120" x2="800" y2="120" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6 5" />
+        <text x="795" y="54" text-anchor="end" font-size="11" font-weight="700" fill="#475569" letter-spacing="1.5">UPPER LIMIT</text>
+        <text x="795" y="135" text-anchor="end" font-size="11" font-weight="700" fill="#475569" letter-spacing="1.5">LOWER LIMIT</text>
+        <!-- divider line at midpoint -->
+        <line x1="400" y1="0" x2="400" y2="180" stroke="#CBD5E1" stroke-width="1" stroke-dasharray="3 4" />
+        <!-- noisy data line (red, first half) -->
+        <polyline fill="none" stroke="#DC2626" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"
+          points="0,90 30,30 60,150 90,45 120,165 150,38 180,100 210,20 240,140 270,80 300,170 330,28 360,135 400,90" />
+        <!-- clean data line (green, second half) -->
+        <polyline fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"
+          points="400,90 415,87 430,92 445,89 460,86 475,91 490,93 505,88 520,86 535,90 550,92 565,89 580,87 595,90 610,93 625,89 640,87 655,90 670,91 685,88 700,86 715,90 730,92 745,89 760,87 775,91 800,90" />
+        <!-- data points on noisy side -->
+        <g fill="#DC2626">
+          <circle cx="0" cy="90" r="3" /><circle cx="30" cy="30" r="3" /><circle cx="60" cy="150" r="3" />
+          <circle cx="90" cy="45" r="3" /><circle cx="120" cy="165" r="3" /><circle cx="150" cy="38" r="3" />
+          <circle cx="180" cy="100" r="3" /><circle cx="210" cy="20" r="3" /><circle cx="240" cy="140" r="3" />
+          <circle cx="270" cy="80" r="3" /><circle cx="300" cy="170" r="3" /><circle cx="330" cy="28" r="3" />
+          <circle cx="360" cy="135" r="3" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="ps-grid">
+      <div class="ps-col ps-then">
+        <div class="ps-label">Today · Manual</div>
+        <ul class="ps-list">
+          <li><span class="ps-mark">×</span><span>Operators stop production, pull samples by hand, or pay a third party to do it</span></li>
+          <li><span class="ps-mark">×</span><span>Variation between samples and the adjustments that follow</span></li>
+          <li><span class="ps-mark">×</span><span>Bad testing damages tools, scraps parts, and creates safety incidents</span></li>
+          <li><span class="ps-mark">×</span><span>Low data volume, no real-time visibility</span></li>
+        </ul>
+      </div>
+      <div class="ps-col ps-now">
+        <div class="ps-label">With ChemCom · Automated</div>
+        <ul class="ps-list">
+          <li><span class="ps-mark ps-mark-good">✓</span><span>Concentration held in spec 24/7. Less waste, longer tool life, lower employee risk</span></li>
+          <li><span class="ps-mark ps-mark-good">✓</span><span>Tighter control means cleaner data and stronger analysis</span></li>
+          <li><span class="ps-mark ps-mark-good">✓</span><span>SaaS dashboard, daily reports, alarms, full traceability</span></li>
+          <li><span class="ps-mark ps-mark-good">✓</span><span>Customer ROI under 12 months on average</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3 — QUICK INTRO ============ -->
+  <section class="slide slide-intro" data-title="Quick Intro">
+    <img class="intro-product" src="images/79b1fc2c-b68d-4f56-81d6-1a54c61a0557.png" alt="ChemCom controller" />
+
+    <div class="title-banner">
+      <div class="header">
+        <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+        <div class="slide-number">03 · About Me</div>
+      </div>
+      <div class="banner-body">
+        <div class="title-block">
+          <div class="eyebrow">From the inside</div>
+          <h2 class="section" style="margin-top:14px">Three things I'm excited about <span class="hand">as the engineer.</span></h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-body">
+      <ul class="numbered">
+        <li>
+          <div class="n">01</div>
+          <div class="t"><strong>Crack plating wide open.</strong> My background. The hardest segment in our market. Nail it and every other vertical is a cakewalk.</div>
+        </li>
+        <li>
+          <div class="n">02</div>
+          <div class="t"><strong>Let the data reveal what we're missing.</strong> Today's limits follow standard practice. With enough data, ML can surface deeper patterns the human eye can't trace.</div>
+        </li>
+        <li>
+          <div class="n">03</div>
+          <div class="t"><strong>Less waste, leaner plants.</strong> Every system we install cuts chemistry use, scrap, and tool replacement at the floor.</div>
+        </li>
+      </ul>
+      <div class="closer">What I'm about to show you is what sold me on joining.</div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4 — HERO: CESSNA ============ -->
+  <section class="slide" data-title="Hero: Cessna / Textron">
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">04 · Proof · Cessna / Textron</div>
+    </div>
+
+    <div class="eyebrow">Hero Customer</div>
+    <div class="hero-row">
+      <div class="hero-row-text">
+        <h2 class="section" style="margin-top:14px">
+          <span class="accent">Three years</span> in. <span class="accent">48%</span> cost reduction.
+        </h2>
+        <div class="award-line">Textron Chairman's Award · Highest cost-savings in the company</div>
+      </div>
+      <img class="customer-logo" src="images/logos/cessna.webp" alt="Cessna · Textron Aviation" />
+    </div>
+
+    <div class="case-grid">
+      <div class="stats">
+        <div class="stat"><div class="num accent">48%</div><div class="lbl">Chemical cost reduction</div></div>
+        <div class="stat"><div class="num">90%+</div><div class="lbl">Total cost reduction incl. manpower</div></div>
+        <div class="stat"><div class="num">3 yrs</div><div class="lbl">Continuous run time, still going</div></div>
+        <div class="stat"><div class="num">~0</div><div class="lbl">Scrap from staining / finish</div></div>
+      </div>
+      <div class="quote">
+        "Before installing the ChemCom 3016, our machining department was a real challenge. Coolant concentrations were constantly fluctuating. Since commissioning the controller, we have complete visibility. The entire department is running better than ever. We're expanding it across other parts of the plant."
+        <div class="who">Stephen H., Engineer · Ford Motor Co.</div>
+      </div>
+    </div>
+
+    <div class="customer-strip">
+      <div class="customer-strip-logos">
+        <img src="images/logos/ford.webp" alt="Ford" />
+        <img src="images/logos/cummins.webp" alt="Cummins" />
+        <img src="images/logos/ge.webp" alt="GE Aerospace" />
+        <img src="images/logos/detroit.webp" alt="Detroit Diesel" />
+        <img src="images/logos/gm.webp" alt="GM" />
+        <img src="images/logos/stecker.webp" alt="Stecker Machine" />
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ SLIDE 5 — SCALING + AMSOIL ============ -->
+  <section class="slide" data-title="Scaling">
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">05 · Scaling</div>
+    </div>
+
+    <div class="eyebrow">We're scaling</div>
+    <h2 class="section" style="margin-top:16px; max-width:1200px">
+      <span class="accent">4×</span> revenue growth and a multi-year deal with <span class="accent">Amsoil</span> in motion.
+    </h2>
+
+    <div class="scaling-grid">
+      <div class="scaling-left">
+        <div class="amsoil-card">
+          <img class="amsoil-logo" src="images/logos/amsoil.webp" alt="Amsoil" />
+          <div class="amsoil-tag">In motion · Multi-year take-or-pay</div>
+          <p class="amsoil-desc">A multi-year commitment with select exclusivity. Once papered, it materially changes our distribution footprint in the metalworking-fluids channel.</p>
+        </div>
+      </div>
+      <div class="scaling-right">
+        <div class="scaling-stats">
+          <div class="stat"><div class="num accent">4×</div><div class="lbl">YoY revenue growth</div></div>
+          <div class="stat"><div class="num">$2.0M</div><div class="lbl">2026 forecast</div></div>
+          <div class="stat"><div class="num">25+</div><div class="lbl">Active proposals</div></div>
+          <div class="stat"><div class="num">9</div><div class="lbl">End-users live</div></div>
+        </div>
+        <div class="partner-row">
+          <div class="partner-row-label">Channel partners</div>
+          <div class="partner-tags">
+            <span class="partner-tag"><strong>Equimsa</strong> · Signed</span>
+            <span class="partner-tag"><strong>Amsoil</strong> · In motion</span>
+            <span class="partner-tag"><strong>Sentry Equipment</strong> · In talks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 6 — ECONOMICS + MARKET ============ -->
+  <section class="slide slide-dark" data-title="Economics + Market">
+    <img class="dark-bg" src="images/background.webp" alt="" />
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">06 · Economics &amp; Market</div>
+    </div>
+
+    <div class="eyebrow">How we make money · How big the room is</div>
+    <h2 class="section" style="margin-top:16px; max-width:1200px">
+      Customers pay us back in <span class="accent">months</span>. The room is <span class="accent">$11B</span>.
+    </h2>
+
+    <div class="em-grid">
+      <div class="em-col">
+        <div class="em-col-label">Income streams</div>
+        <ul class="em-list">
+          <li><strong>Hardware sales</strong> · 47–58% margin per unit</li>
+          <li><strong>SaaS subscription</strong> · recurring, per controller</li>
+          <li><strong>Enterprise licensing</strong> · tiered, multi-unit</li>
+          <li><strong>Aftermarket + spares</strong> · ongoing</li>
+        </ul>
+        <div class="em-callout">
+          <div class="em-callout-num accent">2.5 mo</div>
+          <div class="em-callout-lbl">Fastest customer payback (3001 central controller)</div>
+        </div>
+      </div>
+      <div class="em-col">
+        <div class="em-col-label">Market</div>
+        <div class="market-row">
+          <div class="market-bar" style="width:8%; background:#22D3EE; color:#0B1220;">$117M</div>
+          <div class="market-bar-lbl">Beachhead · Domestic automotive</div>
+        </div>
+        <div class="market-row">
+          <div class="market-bar" style="width:18%; background:#06B6D4; color:#0B1220;">$464M</div>
+          <div class="market-bar-lbl">Expansion · Plating, F&amp;B, data center cooling</div>
+        </div>
+        <div class="market-row">
+          <div class="market-bar" style="width:100%; background:#0E7490; color:#FFFFFF;">$11B</div>
+          <div class="market-bar-lbl">Long-run · Oil &amp; gas, ag, semiconductor, pharma</div>
+        </div>
+        <div class="em-footnote">North American TAM, built bottoms-up. We earn the right to the $11B over a decade.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 7 — ASK + PARTNER ============ -->
+  <section class="slide slide-dark" data-title="The Ask">
+    <img class="dark-bg" src="images/background.webp" alt="" />
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">07 · The Ask</div>
+    </div>
+
+    <div class="eyebrow">What we're looking for in a partner</div>
+    <h2 class="section" style="margin-top:14px; max-width:1240px">
+      Four places the right partner <span class="accent">moves the needle</span>.
+    </h2>
+
+    <div class="ask-grid">
+      <div class="ask-card">
+        <div class="n">01</div>
+        <h4>Pricing &amp; product strategy</h4>
+        <p>Board-level input on customer-facing software direction and how we price the recurring SaaS line as a primary revenue driver.</p>
+      </div>
+      <div class="ask-card">
+        <div class="n">02</div>
+        <h4>Commercial hiring network</h4>
+        <p>Introductions to top industrial sales and customer-success talent for our first dedicated commercial hires.</p>
+      </div>
+      <div class="ask-card">
+        <div class="n">03</div>
+        <h4>Installation &amp; channel</h4>
+        <p>Construction-industry and union-shop installation partners to unlock segments where qualification requirements are the access barrier.</p>
+      </div>
+      <div class="ask-card">
+        <div class="n">04</div>
+        <h4>Operating experience</h4>
+        <p>Hands-on board-level experience scaling industrial hardware plus SaaS. Capital efficiency, channel discipline, enterprise readiness.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 15 — EXIT + CLOSE ============ -->
+  <section class="slide slide-dark" data-title="Exit + Close">
+    <img class="dark-bg" src="images/background.webp" alt="" />
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">08 · Comparable Exits</div>
+    </div>
+
+    <div class="eyebrow">Same universe as our distribution network</div>
+    <h2 class="section" style="margin-top:16px">Our channel partners <span class="dim">are</span> our acquirers.</h2>
+
+    <div class="comps-row">
+      <div class="comp">
+        <div class="val">$670M</div>
+        <div class="desc">Control systems for industrial compressors</div>
+        <div class="year">2023</div>
+      </div>
+      <div class="comp">
+        <div class="val">$300M</div>
+        <div class="desc">Industrial process analytics SW · oil &amp; gas, chemicals, IIOT</div>
+        <div class="year">2023</div>
+      </div>
+      <div class="comp">
+        <div class="val">$90M</div>
+        <div class="desc">Erthwrks — mobile air-quality testing &amp; monitoring</div>
+        <div class="year">2025</div>
+      </div>
+      <div class="comp">
+        <div class="val">$44M</div>
+        <div class="desc">Zimmark — chemical management for metal processors</div>
+        <div class="year">2019</div>
+      </div>
+    </div>
+
+    <div class="close-card">
+      <div class="tag">Cruise control for the<br/><span class="accent">chemicals inside factory machines.</span></div>
+      <div class="contact">
+        <div class="name">Robert Thomas</div>
+        <div>Engineering · ChemCom</div>
+        <div style="margin-top:14px">smcreynolds@oaklandchemical.com</div>
+        <div>chemcom.com</div>
+      </div>
+    </div>
+  </section>
+
+</div></div>
+
+<button class="back-btn" id="back" aria-label="Previous slide">←</button>
+<div class="page-count" id="counter">1 / 5</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const deck = document.getElementById('deck');
+  const counter = document.getElementById('counter');
+  const backBtn = document.getElementById('back');
+  let idx = 0;
+
+  function show(i) {
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach((s, k) => s.classList.toggle('active', k === idx));
+    counter.textContent = `${idx + 1} / ${slides.length}`;
+    backBtn.classList.toggle('visible', idx > 0);
+  }
+
+  function fit() {
+    // Leave space for back button (top) and page counter (bottom)
+    const W = window.innerWidth;
+    const H = window.innerHeight - 140;
+    const sw = 1440, sh = 1080;
+    const scale = Math.min(W / sw, H / sh) * 0.96;
+    // transform-origin is 0,0 — translate by -50% of scaled size to center
+    deck.style.transform = `translate(${-sw * scale / 2}px, ${-sh * scale / 2}px) scale(${scale})`;
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit();
+
+  // Click anywhere advances forward (but not on the back button)
+  document.body.addEventListener('click', (e) => {
+    if (e.target.closest('.back-btn')) return;
+    show(idx + 1);
+  });
+
+  backBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    show(idx - 1);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(idx + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(idx - 1);
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    if (e.key.toLowerCase() === 'f') document.documentElement.requestFullscreen();
+  });
+
+  show(0);
+</script>
+</body>
+</html>

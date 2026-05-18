@@ -1,0 +1,12 @@
+.DS_Store
+.claude/
+*.swp
+*.swo
+node_modules/
+
+# Private working notes — never commit (contains internal context)
+master-deck-outline.md
+pitch-deck-summary.md
+pitch-routes-proposal.md
+what-im-looking-for.md
+
