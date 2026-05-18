@@ -624,8 +624,9 @@
   }
 
   /* Dark Ages interlude slide */
-  .slide-darkages::after {
-    background: linear-gradient(180deg, rgba(5,9,18,0.65) 0%, rgba(5,9,18,0.85) 100%);
+  .slide-darkages::after { display: none; }
+  .slide-darkages .dark-bg {
+    filter: none;
   }
   .slide-darkages .darkages-title {
     position: absolute;
