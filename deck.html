@@ -1157,12 +1157,11 @@
   }
 
   function fit() {
-    // Leave space for back button (top) and page counter (bottom)
+    // Near-full-screen — back button and page counter overlay the deck corners with their own scrim
     const W = window.innerWidth;
-    const H = window.innerHeight - 140;
+    const H = window.innerHeight;
     const sw = 1440, sh = 1080;
-    const scale = Math.min(W / sw, H / sh) * 0.96;
-    // transform-origin is 0,0 · translate by -50% of scaled size to center
+    const scale = Math.min(W / sw, H / sh) * 0.995;
     deck.style.transform = `translate(${-sw * scale / 2}px, ${-sh * scale / 2}px) scale(${scale})`;
   }
   window.addEventListener('resize', fit);
