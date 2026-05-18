@@ -623,6 +623,30 @@
     text-align: right;
   }
 
+  /* Dark Ages interlude slide */
+  .slide-darkages::after {
+    background: linear-gradient(180deg, rgba(5,9,18,0.65) 0%, rgba(5,9,18,0.85) 100%);
+  }
+  .slide-darkages .darkages-title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .slide-darkages .big-title {
+    font-size: 200px;
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    color: #FFFFFF;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 8px 40px rgba(0,0,0,0.7);
+  }
+
   /* Plating focus slide */
   .plating-grid {
     margin-top: 56px;
@@ -906,11 +930,84 @@
     </div>
   </section>
 
-  <!-- ============ SLIDE 2 · PROBLEM + SOLUTION ============ -->
+  <!-- ============ SLIDE 2 · WHERE THIS STARTED (story-driven) ============ -->
+  <section class="slide slide-dark slide-photo slide-story" data-title="Where this started">
+    <img class="dark-bg" src="images/PPE.JPG" alt="" />
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">02 · Where this started</div>
+    </div>
+
+    <div class="eyebrow">Where this started</div>
+    <h2 class="section" style="margin-top:14px; max-width:1100px">
+      <span class="accent">50+ tanks.</span> <span class="accent">80% scrap.</span>
+      Six months to fight it back.
+    </h2>
+
+    <div class="story-grid">
+      <div class="story-text">
+        <p class="lede" style="color: rgba(255,255,255,0.85); margin: 0;">
+          Lab tech on a chrome-plating floor. Routine checks ate every shift. The chemistry kept drifting. The cost was real, in money and in people.
+        </p>
+        <div class="story-punch">There has to be a better way.</div>
+      </div>
+      <div class="story-inset-wrap">
+        <img class="story-inset" src="images/rash.JPG" alt="Chemical rash" />
+        <div class="story-inset-cap">Daily exposure. Routine, not exceptional.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 3 · PLATING IS NEXT (story-driven) ============ -->
+  <section class="slide slide-dark slide-photo" data-title="Plating is next">
+    <img class="dark-bg" src="images/defects.JPG" alt="" />
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">03 · Plating is next</div>
+    </div>
+
+    <div class="eyebrow">Where we expand</div>
+    <h2 class="section" style="margin-top:14px; max-width:1200px">
+      Tri-chrome plating. <span class="accent">Where the most good happens.</span>
+    </h2>
+
+    <div class="plating-grid">
+      <div class="plating-card">
+        <div class="plating-n">01</div>
+        <h4>Decorative + functional</h4>
+        <p>High-value parts that need both surface finish and protection. Plating runs hot, contamination spikes fast.</p>
+      </div>
+      <div class="plating-card">
+        <div class="plating-n">02</div>
+        <h4>Expensive baths, dumped often</h4>
+        <p>When contamination climbs, the whole bath goes down the drain. Five-figure chemistry, gone in a shift.</p>
+      </div>
+      <div class="plating-card">
+        <div class="plating-n">03</div>
+        <h4>Workers out, revenue in</h4>
+        <p>Keep techs away from hexchrome and acid. Keep the bath generating revenue instead of going to waste.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 4 · THE DARK AGES (visual interlude) ============ -->
+  <section class="slide slide-dark slide-photo slide-darkages" data-title="The Dark Ages">
+    <img class="dark-bg" src="images/dark-ages.jpg" alt="" />
+    <div class="header">
+      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
+      <div class="slide-number">04 · The Dark Ages</div>
+    </div>
+
+    <div class="darkages-title">
+      <h1 class="big-title">The Dark Ages.</h1>
+    </div>
+  </section>
+
+  <!-- ============ SLIDE 5 · PROBLEM + SOLUTION ============ -->
   <section class="slide slide-ps" data-title="Problem + Solution">
     <div class="header">
       <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">02 · The Problem &amp; Solution</div>
+      <div class="slide-number">05 · The Problem &amp; Solution</div>
     </div>
 
     <div class="eyebrow">The problem &amp; solution</div>
@@ -968,42 +1065,14 @@
     </div>
   </section>
 
-  <!-- ============ SLIDE 3 · WHERE THIS STARTED (NEW · story-driven) ============ -->
-  <section class="slide slide-dark slide-photo slide-story" data-title="Where this started">
-    <img class="dark-bg" src="images/PPE.JPG" alt="" />
-    <div class="header">
-      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">03 · Where this started</div>
-    </div>
-
-    <div class="eyebrow">Where this started</div>
-    <h2 class="section" style="margin-top:14px; max-width:1100px">
-      <span class="accent">50+ tanks.</span> <span class="accent">80% scrap.</span>
-      Six months to fight it back.
-    </h2>
-
-    <div class="story-grid">
-      <div class="story-text">
-        <p class="lede" style="color: rgba(255,255,255,0.85); margin: 0;">
-          Lab tech on a chrome-plating floor. Routine checks ate every shift. The chemistry kept drifting. The cost was real, in money and in people.
-        </p>
-        <div class="story-punch">There has to be a better way.</div>
-      </div>
-      <div class="story-inset-wrap">
-        <img class="story-inset" src="images/rash.JPG" alt="Chemical rash" />
-        <div class="story-inset-cap">Daily exposure. Routine, not exceptional.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SLIDE 4 · QUICK INTRO ============ -->
+  <!-- ============ SLIDE 5 · QUICK INTRO ============ -->
   <section class="slide slide-intro" data-title="Quick Intro">
     <img class="intro-product" src="images/79b1fc2c-b68d-4f56-81d6-1a54c61a0557.png" alt="ChemCom controller" />
 
     <div class="title-banner">
       <div class="header">
         <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-        <div class="slide-number">04 · About Me</div>
+        <div class="slide-number">06 · About Me</div>
       </div>
       <div class="banner-body">
         <div class="title-block">
@@ -1036,7 +1105,7 @@
   <section class="slide" data-title="Hero: Cessna / Textron">
     <div class="header">
       <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">05 · Proof · Cessna / Textron</div>
+      <div class="slide-number">07 · Proof · Cessna / Textron</div>
     </div>
 
     <div class="eyebrow">Hero Customer</div>
@@ -1080,7 +1149,7 @@
   <section class="slide" data-title="Scaling">
     <div class="header">
       <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">06 · Scaling</div>
+      <div class="slide-number">08 · Scaling</div>
     </div>
 
     <div class="eyebrow">We're scaling</div>
@@ -1115,44 +1184,12 @@
     </div>
   </section>
 
-  <!-- ============ SLIDE 7 · PLATING IS NEXT (NEW · story-driven) ============ -->
-  <section class="slide slide-dark slide-photo" data-title="Plating is next">
-    <img class="dark-bg" src="images/defects.JPG" alt="" />
-    <div class="header">
-      <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">07 · Plating is next</div>
-    </div>
-
-    <div class="eyebrow">Where we expand</div>
-    <h2 class="section" style="margin-top:14px; max-width:1200px">
-      Tri-chrome plating. <span class="accent">Where the most good happens.</span>
-    </h2>
-
-    <div class="plating-grid">
-      <div class="plating-card">
-        <div class="plating-n">01</div>
-        <h4>Decorative + functional</h4>
-        <p>High-value parts that need both surface finish and protection. Plating runs hot, contamination spikes fast.</p>
-      </div>
-      <div class="plating-card">
-        <div class="plating-n">02</div>
-        <h4>Expensive baths, dumped often</h4>
-        <p>When contamination climbs, the whole bath goes down the drain. Five-figure chemistry, gone in a shift.</p>
-      </div>
-      <div class="plating-card">
-        <div class="plating-n">03</div>
-        <h4>Workers out, revenue in</h4>
-        <p>Keep techs away from hexchrome and acid. Keep the bath generating revenue instead of going to waste.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ SLIDE 8 · ECONOMICS + MARKET ============ -->
   <section class="slide slide-dark" data-title="Economics + Market">
     <img class="dark-bg" src="images/background.webp" alt="" />
     <div class="header">
       <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">08 · Economics &amp; Market</div>
+      <div class="slide-number">09 · Economics &amp; Market</div>
     </div>
 
     <div class="eyebrow">How we make money · How big the room is</div>
@@ -1198,7 +1235,7 @@
     <img class="dark-bg" src="images/background.webp" alt="" />
     <div class="header">
       <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">09 · The Ask</div>
+      <div class="slide-number">10 · The Ask</div>
     </div>
 
     <div class="eyebrow">What we're looking for in a partner</div>
@@ -1235,7 +1272,7 @@
     <img class="dark-bg" src="images/background.webp" alt="" />
     <div class="header">
       <div class="brandmark"><span class="glyph">CC</span> ChemCom</div>
-      <div class="slide-number">10 · Comparable Exits</div>
+      <div class="slide-number">11 · Comparable Exits</div>
     </div>
 
     <div class="eyebrow">Same universe as our distribution network</div>
